@@ -1,0 +1,3 @@
+policy,cpu_qos,dma_qos,dnn_qos,cpu_outstanding,dma_outstanding,dnn_outstanding,axi_queue_depth,cpu_avg_ns,cpu_p50_ns,cpu_p95_ns,cpu_p99_ns,cpu_max_ns,accelerator_throughput_gbps
+qos,8,4,12,8,16,32,16,894.3,948.0,1333.0,1354.6,1360.0,10.46
+qos,8,8,12,8,16,32,16,894.3,948.0,1333.0,1354.6,1360.0,10.46

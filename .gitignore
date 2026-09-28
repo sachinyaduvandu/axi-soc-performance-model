@@ -1,0 +1,25 @@
+# Build directory
+build/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Compiled objects / binaries
+*.o
+*.a
+*.so
+soc_sim
+
+# Python
+__pycache__/
+*.pyc
+
+# Temporary/editor files
+*.swp
+*~
+.DS_Store
+Thumbs.db
