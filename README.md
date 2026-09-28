@@ -359,11 +359,15 @@ Repository Structure
 │   ├── pareto_frontier.png
 │   ├── outstanding_dse.csv
 │   ├── outstanding_pareto.csv
-│   └── outstanding_pareto.png
+│   ├── outstanding_pareto.png
+│   ├── memory_bandwidth.csv
+│   ├── memory_bandwidth.png
+│   └── memory_latency.png
 │
 ├── scripts/
 │   ├── run_dse.py
-│   └── run_outstanding_dse.py
+│   ├── run_outstanding_dse.py
+│   └── plot_results.py
 │
 └── src/
     ├── arbitration/
@@ -374,7 +378,7 @@ Repository Structure
 
 The build/ directory and compiled binaries are intentionally excluded from version control.
 
-Limitations
+## Limitations
 
 This project is an architectural performance model, not an RTL implementation or a JEDEC/cycle-accurate DDR/LPDDR controller.
 
@@ -390,26 +394,67 @@ Accelerator throughput represents modeled memory traffic, not application-level 
 
 Therefore, numerical results should be interpreted as results of the modeled architecture and assumptions rather than measurements of a specific commercial DDR/LPDDR device or SoC.
 
-Technologies
-C++17
-SystemC
-TLM-2.0
-Python
-CMake
-AXI-style interconnect modeling
-Computer Architecture
-Memory-System Modeling
-Design-Space Exploration
-Author
+## Experimental Results
+
+### Memory Bandwidth Saturation
+
+![Memory bandwidth saturation](results/memory_bandwidth.png)
+
+The modeled memory subsystem saturates at approximately **17 GB/s** under the Phase 15 workload and timing assumptions.
+
+| Offered BW | Achieved BW | Avg. Latency |
+|---:|---:|---:|
+| 8 GB/s | 7.915 GB/s | 120 ns |
+| 16 GB/s | 15.604 GB/s | 120 ns |
+| 32 GB/s | 16.821 GB/s | 988 ns |
+| 64 GB/s | 16.943 GB/s | 1484 ns |
+| 128 GB/s | 17.005 GB/s | 1732 ns |
+| 256 GB/s | 17.036 GB/s | 1856 ns |
+
+### Memory Latency Under Load
+
+![Memory latency](results/memory_latency.png)
+
+Latency remains near the modeled row-miss service time at low load and rises sharply once the memory subsystem becomes saturated.
+
+### CPU P99 vs Accelerator Throughput
+
+![CPU P99 vs accelerator throughput](results/outstanding_pareto.png)
+
+A focused design-space exploration varied CPU outstanding capacity.
+
+| CPU Outstanding | CPU P99 | Accelerator Throughput |
+|---:|---:|---:|
+| 2 | 1324.0 ns | 7.96 GB/s |
+| 8 | 1354.6 ns | 10.46 GB/s |
+
+Increasing CPU outstanding capacity from 2 to 8 increased modeled accelerator throughput by approximately **31.4%**, while CPU P99 latency increased by approximately **2.3%**.
+
+---
+
+## Technologies
+
+- C++17
+- SystemC
+- TLM-2.0
+- Python
+- CMake
+- AXI-style interconnect modeling
+- Computer Architecture
+- Memory-System Modeling
+- Design-Space Exploration
+
+## Author
+
 Sachin Yaduvandu
 
 M.Tech VLSI & Embedded Systems
 
-Focus areas:
+**Focus areas:**
 
-SoC Performance Modeling
-SystemC / TLM-2.0
-Computer Architecture
-Interconnect & Memory-System Modeling
-Architecture Exploration
-Pre-Silicon Performance Analysis
+- SoC Performance Modeling
+- SystemC / TLM-2.0
+- Computer Architecture
+- Interconnect & Memory-System Modeling
+- Architecture Exploration
+- Pre-Silicon Performance Analysis
