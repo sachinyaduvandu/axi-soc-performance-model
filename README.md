@@ -57,6 +57,7 @@ The model represents CPU, DMA, and DNN accelerator traffic sharing an AXI-style 
                                |  Row Hit:  50 ns  |
                                |  Row Miss: 120 ns |
                                +-------------------+
+```
 
 The model separates traffic generation, interconnect behavior, arbitration, memory-controller scheduling, and DRAM timing so that architectural parameters can be explored independently.
 
